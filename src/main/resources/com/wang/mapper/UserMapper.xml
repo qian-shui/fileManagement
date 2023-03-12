@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.mapper.UserMapper">
+
+    <select id="findAllUser" resultType="com.wang.pojo.User">
+        select * from vue_user;
+    </select>
+
+    <insert id="saveUser" parameterType="com.wang.pojo.User">
+        insert into vue_user(username,password,nickname,email,phone,address)
+        values(#{username},#{password},#{nickname},#{email},#{phone},#{address})
+    </insert>
+
+    <update id="updateUser" parameterType="com.wang.pojo.User">
+        update vue_user
+        <set>
+            <if test="username != null and username !='' ">
+                username = #{username},
+            </if>
+            <if test="nickname != null and nickname !=''">
+                nickname = #{nickname},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="address != null">
+                address = #{address}
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <delete id="deleteUser" parameterType="integer">
+        delete from vue_user where id = #{id}
+    </delete>
+
+<!--    <select id="selectPage" resultType="com.wang.pojo.User">-->
+<!--        select * from vue_user-->
+<!--        <where>-->
+<!--            username like concat('%',#{username},'%')-->
+<!--        </where>-->
+<!--        limit #{pageNum},#{pageSize}-->
+<!--    </select>-->
+
+</mapper>

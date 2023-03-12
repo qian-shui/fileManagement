@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.mapper.CommentMapper">
+
+    <select id="findDataByArticleId" resultType="com.wang.pojo.Comment">
+        select c.*,u.nickname,u.avatar_url from vue_comment c left join vue_user u
+        on c.user_id = u.id
+        where c.article_id = #{articleId}
+        order by id desc
+    </select>
+</mapper>
